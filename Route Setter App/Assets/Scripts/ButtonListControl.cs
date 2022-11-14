@@ -16,7 +16,7 @@ public class ButtonListControl : MonoBehaviour
             GameObject button = Instantiate(buttonTemplate) as GameObject;
             button.SetActive(true);
 
-            button.GetComponent<ButtonListButton>().SetText("grade name date")
+            button.GetComponent<ButtonListButton>().SetText("grade name date");
 
             button.transform.SetParent(buttonTemplate.transform.parent, false);
         }

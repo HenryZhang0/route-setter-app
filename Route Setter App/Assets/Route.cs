@@ -4,19 +4,46 @@ using UnityEngine;
 
 public class Route : MonoBehaviour
 {
+    // public TextAsset jsonFile;
+ 
+    // void Start()
+    // {
+    //     Wall Walls = JsonUtility.FromJson<Wall>(jsonFile.text);
+ 
+    //     foreach (Wall wall in Walls.wall)
+    //     {
+    //         Instantiate Wall(wall.x, wall.y, wall.scale);
+    //     }
+
+    //     foreach (Hold hold in Holds.hold)
+    //     {
+    //         Instantiate Hold(hold.x, hold.y, hold.scale);
+    //     }
+
+    //     Climb climb = new Climb(Walls, Holds);
+    // }
+}
+
+public class Climb
+{
     // Metadata
     public int Grade = 0;
     public string Date = "Mon Nov 14, 2022";
 
     // Geometry data
-    public Wall[] Walls;
+    public List <Wall> Walls;
+    public List <Hold> Holds;
 
-}
+    
 
-public class RouteX
-{
-    public Wall[] Walls;
-    public Hold[] Holds;
+    public void AddHold(Hold h) {
+        Holds.Add(h);
+        // instantiate h;
+    }
+
+    public void DeleteHold(Hold h) {
+        Holds.Remove(h);
+    }
 
 }
 
@@ -29,5 +56,7 @@ public class Wall
 public class Hold
 {
     public Vector3 position = new Vector3(0,0,0);
+    public float scale = 1;
+    public Quaternion rotation = Quaternion.identity;
     public Color Colour;
 }

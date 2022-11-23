@@ -7,6 +7,7 @@ public class LevelEditorManager : MonoBehaviour
     public ItemController[] ItemButtons;
     public GameObject[] ItemPrefabs;
     public GameObject[] ItemImage;
+    public GameObject Wall;
     public int CurrentButtonPressed;
 
     Ray ray;
@@ -20,7 +21,7 @@ public class LevelEditorManager : MonoBehaviour
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if(Physics.Raycast(ray, out hit))
         {
-            if(hit.collider.name != "Wall") {
+            if(hit.collider.tag != "Wall") {
                 return;
             }
 
@@ -31,5 +32,10 @@ public class LevelEditorManager : MonoBehaviour
                 
             }
         }
+    }
+
+    public void SpawnWall()
+    {
+        Instantiate(Wall, Vector3.zero, new Quaternion(-90,0,0,90));
     }
 }

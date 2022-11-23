@@ -14,7 +14,7 @@ public class FollowScript : MonoBehaviour
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if(Physics.Raycast(ray, out hit))
         {
-            if(hit.collider.name != "Wall") {
+            if(hit.collider.tag != "Wall") {
                 return;
             }
             transform.position = hit.point;

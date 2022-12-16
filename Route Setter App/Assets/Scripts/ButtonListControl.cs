@@ -6,17 +6,26 @@ public class ButtonListControl : MonoBehaviour
 {
     [SerializeField]
     private GameObject buttonTemplate;
-
-    private List<int> intList;
+    private DatabaseAccess databaseAccess;
 
     void Start() 
     {
-        for (int i = 1; i <= 20; i++) 
+        databaseAccess = GameObject.FindGameObjectWithTag("DatabaseAccess").GetComponent<DatabaseAccess>();
+
+        Invoke("DisplayClimbs", 1f); // waits 1 sec to connect to database before calling DisplayClimbs
+    }
+
+    private async void DisplayClimbs()
+    {
+        var task = databaseAccess.GetClimbsFromDataBase();
+        var result = await task;
+        
+        foreach (var climb in result)
         {
-            GameObject button = Instantiate(buttonTemplate) as GameObject;
+            GameObject button = Instantiate(buttonTemplate);
             button.SetActive(true);
 
-            button.GetComponent<ButtonListButton>().SetText("grade name date");
+            button.GetComponent<ButtonListButton>().SetText(climb);
 
             button.transform.SetParent(buttonTemplate.transform.parent, false);
         }

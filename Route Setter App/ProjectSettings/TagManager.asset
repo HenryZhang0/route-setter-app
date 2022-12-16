@@ -7,6 +7,8 @@ TagManager:
   - LevelEditorManager
   - ItemImage
   - Wall
+  - Hold
+  - DatabaseAccess
   layers:
   - Default
   - TransparentFX

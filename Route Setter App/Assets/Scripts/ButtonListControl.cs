@@ -7,16 +7,43 @@ public class ButtonListControl : MonoBehaviour
     [SerializeField]
     private GameObject buttonTemplate;
 
-    private List<int> intList;
-
     void Start() 
     {
-        for (int i = 1; i <= 20; i++) 
+        if (RealmController.Instance.isRealmReady())
         {
-            GameObject button = Instantiate(buttonTemplate) as GameObject;
+            Invoke("DisplayClimbs", 1f); // waits 1 sec to connect to database before calling DisplayClimbs
+        }
+       
+    }
+
+    public void DisplayClimbs()
+    {
+        if (RealmController.Instance.isRealmReady())
+        {
+            var climbs = RealmController.Instance.GetClimbData();
+
+            foreach (var climb in climbs)
+            {
+                GameObject button = Instantiate(buttonTemplate);
+                button.SetActive(true);
+
+                button.GetComponent<ButtonListButton>().SetText(climb, button);
+
+                button.transform.SetParent(buttonTemplate.transform.parent, false);
+            }
+        }
+    }
+
+    public void UpdateClimbs()
+    {
+        if (RealmController.Instance.isRealmReady())
+        {
+            var climb = RealmController.Instance.GetNewestClimbData();
+
+            GameObject button = Instantiate(buttonTemplate);
             button.SetActive(true);
 
-            button.GetComponent<ButtonListButton>().SetText("grade name date");
+            button.GetComponent<ButtonListButton>().SetText(climb, button);
 
             button.transform.SetParent(buttonTemplate.transform.parent, false);
         }

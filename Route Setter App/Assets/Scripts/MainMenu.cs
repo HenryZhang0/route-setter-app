@@ -22,9 +22,18 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
-
     public void NavigateToGallery ()
     {
         SceneManager.LoadScene(2);
+    }
+
+    public void NavigateToMyClimbs()
+    {
+        SceneManager.LoadScene(3);
+    }
+
+    public void NavigateToMyFriendsClimbs()
+    {
+        SceneManager.LoadScene(4);
     }
 }
